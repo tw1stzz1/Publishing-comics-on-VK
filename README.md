@@ -27,5 +27,5 @@ VK_ACCESS_TOKEN=vk1.a.m1huGVD1bkhS9sdNJ2HmhNEdU8KPvuOlGcf-z2OLZ7iM6nmUfGnR4FvRjZ
 ``` python
 python main.py
 ```
-В процессе код будет создовать временные файлы, но по завершению удалит их.
+В процессе код будет создовать временные файлы, но по завершению удалит их (кроме папки).
 
