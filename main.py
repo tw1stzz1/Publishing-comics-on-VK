@@ -36,7 +36,7 @@ def get_upload_url(vk_access_token, group_id):
     }
     response = requests.get(url, params)
     response.raise_for_status()
-    check_response(response.json())
+    check_response(response)
     upload_url = response.json()['response']['upload_url']
     return upload_url
 
@@ -49,7 +49,7 @@ def upload_comics(upload_url, comics_filepath):
         }
         response = requests.post(url, files=files)
     response.raise_for_status() 
-    check_response(response.json())
+    check_response(response)
     answer = response.json()
     photo = answer['photo']
     server = answer['server']
@@ -68,7 +68,7 @@ def upload_comics_on_wall(vk_access_token, group_id, photo, vk_server, comisc_ha
     }
     response = requests.post(url, params)
     response.raise_for_status()
-    check_response(response.json())
+    check_response(response)
     answer = response.json()
     media_id = answer['response'][0]['id']
     owner_id = answer['response'][0]['owner_id']
@@ -88,6 +88,7 @@ def publsih_comics_on_wall(vk_access_token, group_id, owner_id, alt, media_id):
     }
     response = requests.post(url, params)
     response.raise_for_status()
+    check_response(response)
     return response.json()
 
 
@@ -100,7 +101,6 @@ def check_response(response):
 
 def main():
     load_dotenv()
-    client_id = os.getenv("CLIENT_ID")
     group_id = os.getenv("GROUP_ID")
     vk_access_token = os.getenv("VK_ACCESS_TOKEN")
     Path("comics").mkdir(parents=True, exist_ok=True)
