@@ -49,8 +49,8 @@ def upload_comics(upload_url, comics_filepath):
         }
         response = requests.post(url, files=files)
     response.raise_for_status() 
-    check_response(response)
     answer = response.json()
+    check_response(answer)
     photo = answer['photo']
     server = answer['server']
     comisc_hash = answer['hash']
@@ -68,8 +68,8 @@ def upload_comics_on_wall(vk_access_token, group_id, photo, vk_server, comisc_ha
     }
     response = requests.post(url, params)
     response.raise_for_status()
-    check_response(response)
     answer = response.json()
+    check_response(answer)
     media_id = answer['response'][0]['id']
     owner_id = answer['response'][0]['owner_id']
     return media_id, owner_id
