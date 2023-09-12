@@ -3,7 +3,6 @@ import os
 import random
 from pathlib import Path
 
-import shutil
 from dotenv import load_dotenv
 
 
@@ -36,8 +35,9 @@ def get_upload_url(vk_access_token, group_id):
     }
     response = requests.get(url, params)
     response.raise_for_status()
-    check_response(response)
-    upload_url = response.json()['response']['upload_url']
+    answer = response.json()
+    check_response(answer)
+    upload_url = answer['response']['upload_url']
     return upload_url
 
 
@@ -55,6 +55,7 @@ def upload_comics(upload_url, comics_filepath):
     server = answer['server']
     comisc_hash = answer['hash']
     return photo, server, comisc_hash
+
 
 def upload_comics_on_wall(vk_access_token, group_id, photo, vk_server, comisc_hash):
     url = "https://api.vk.com/method/photos.saveWallPhoto"
@@ -88,7 +89,8 @@ def publsih_comics_on_wall(vk_access_token, group_id, owner_id, alt, media_id):
     }
     response = requests.post(url, params)
     response.raise_for_status()
-    check_response(response)
+    answer = response.json()
+    check_response(answer)
     return response.json()
 
 
