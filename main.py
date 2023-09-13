@@ -53,8 +53,8 @@ def upload_comics(upload_url, comics_filepath):
     check_response(answer)
     photo = answer['photo']
     server = answer['server']
-    comisc_hash = answer['hash']
-    return photo, server, comisc_hash
+    comics_hash = answer['hash']
+    return photo, server, comics_hash
 
 
 def upload_comics_on_wall(vk_access_token, group_id, photo, vk_server, comisc_hash):
@@ -91,7 +91,7 @@ def publsih_comics_on_wall(vk_access_token, group_id, owner_id, alt, media_id):
     response.raise_for_status()
     answer = response.json()
     check_response(answer)
-    return response.json()
+    return answer
 
 
 def check_response(response):
